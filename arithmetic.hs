@@ -40,4 +40,41 @@ primeFactorsMult :: Int -> [(Int, Int)]
 primeFactorsMult n = map swap $ encode $ primeFactors n
   where swap (a,b) = (b,a)
 
---- PROBLEM 11
+--- PROBLEM 37
+phi :: Int -> Int
+phi m = product [(p - 1) * p ^ (m - 1) | (p,m) <- primeFactorsMult m]
+
+
+--- PROBLEM 38
+primesR :: Integral a => a -> a -> [a] 
+primesR low hi = filter isPrime [low..hi] 
+
+
+--- PROBLEM 39
+goldbach :: Int -> (Int, Int)
+goldbach n = head [(x, y) | x <- primeCandidates, y <- primeCandidates, x + y == n]
+  where primeCandidates = primesR 2 n
+
+--- PROBLEM 40
+goldbachList :: Int -> Int -> [(Int, Int)]
+goldbachList low hi = map (\x -> goldbach x) [x | x <- [low..hi], even x]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
