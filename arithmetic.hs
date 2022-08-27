@@ -55,26 +55,8 @@ goldbach :: Int -> (Int, Int)
 goldbach n = head [(x, y) | x <- primeCandidates, y <- primeCandidates, x + y == n]
   where primeCandidates = primesR 2 n
 
+
 --- PROBLEM 40
 goldbachList :: Int -> Int -> [(Int, Int)]
-goldbachList low hi = map (\x -> goldbach x) [x | x <- [low..hi], even x]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+goldbachList low hi = map goldbach [x | x <- [low..hi], even x]
 
