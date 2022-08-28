@@ -29,7 +29,24 @@ cbalTree n =
 
 
 --- PROBLEM 56
+mirror :: Tree a -> Tree a -> Bool
+mirror Empty Empty = True 
+mirror (Branch _ l r) (Branch _ j k) = mirror l k && mirror r j 
+mirror _ _ = False 
 
-            
+symmetric :: Tree a -> Bool
+symmetric Empty = True
+symmetric (Branch _ l r) = mirror l r
 
+--- PROBLEM 57
+appendToTree :: Ord a => a -> Tree a -> Tree a
+appendToTree n Empty = Branch n Empty Empty
+appendToTree n o@(Branch d l r) =
+    case compare n d of 
+      LT -> Branch d (appendToTree n l) r
+      GT -> Branch d l (appendToTree n r)
+      EQ -> o -- we can ignore dupes
+
+construct :: Ord a => [a] -> Tree a
+construct ls = foldl (flip appendToTree) Empty ls
 
